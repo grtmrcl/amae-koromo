@@ -3,18 +3,16 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControlLabel,
   IconButton,
   TextField,
 } from "@mui/material";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { GameMode, getRankLabelByIndexRaw } from "../../data/types";
+import { getRankLabelByIndexRaw } from "../../data/types";
 import Conf from "../../utils/conf";
 import { CheckboxGroup } from "../form";
 import { Model, useModel } from "../gameRecords/model";
@@ -43,10 +41,6 @@ function ExtraSettingsBody({ model, updateModel }: { model: Model; updateModel: 
     (rank: string) => updateModel({ type: "player", rank: parseInt(rank) || null }),
     [updateModel]
   );
-  const setKontenOnly = useCallback(
-    (kontenOnly: boolean) => updateModel({ type: "player", kontenOnly }),
-    [updateModel]
-  );
   if (!("rank" in model)) {
     return <></>;
   }
@@ -65,22 +59,6 @@ function ExtraSettingsBody({ model, updateModel }: { model: Model; updateModel: 
           label={t("查找玩家")}
           value={model.searchText || ""}
           onChange={updateSearchTextFromEvent}
-        />
-      </Box>
-      <Box mt={2}>
-        <FormControlLabel
-          label={t("巅峰对决").toString()}
-          control={
-            <Checkbox
-              disabled={
-                !model.selectedModes.every((x) =>
-                  [GameMode.王座, GameMode.王东, GameMode.三王座, GameMode.三王东].includes(x)
-                )
-              }
-              checked={model.kontenOnly || false}
-              onChange={(e) => setKontenOnly(e.target.checked)}
-            />
-          }
         />
       </Box>
     </>
@@ -139,7 +117,6 @@ export default function ExtraSettings() {
                 type: "player",
                 rank: null,
                 searchText: "",
-                kontenOnly: false,
               })
             }
           >

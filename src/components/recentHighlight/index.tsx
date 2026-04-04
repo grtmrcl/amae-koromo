@@ -26,7 +26,7 @@ function buildEventInfo({ cellData }: TableCellProps) {
     return null;
   }
   const event = cellData as HighlightEvent;
-  if (!event.fan[0].役满) {
+  if (!event.fan[0].役満) {
     return (
       <EventInfo title={FanStatEntryList.formatFanList(event.fan)}>
         {sum(event.fan.map((x) => x.count))} <Trans>番</Trans>

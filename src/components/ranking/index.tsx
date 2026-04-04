@@ -3,8 +3,7 @@ import React from "react";
 import { Alert } from "../misc/alert";
 import DeltaRanking from "./deltaRanking";
 import { CareerRanking, CareerRankingColumn, CareerRankingPlain } from "./careerRanking";
-import { CareerRankingType, LevelWithDelta } from "../../data/types";
-import { PlayerMetadata } from "../../data/types/metadata";
+import { CareerRankingType } from "../../data/types";
 import { formatFixed3, formatIdentity, formatPercent, formatRound } from "../../utils/index";
 import { ViewRoutes, SimpleRoutedSubViews, NavButtons, RouteDef } from "../routing";
 import { ViewSwitch } from "../routing/index";
@@ -30,41 +29,10 @@ const ROUTES = (
         <CareerRankingColumn type={CareerRankingType.Rank3} title="三位率" />
       </CareerRanking>
     </RouteDef>
-    <RouteDef path="career2" title="连对率/安定段位" disabled={SANMA}>
+    <RouteDef path="career2" title="连对率" disabled={SANMA}>
       <CareerRanking>
         <CareerRankingColumn type={CareerRankingType.Rank12} title="连对率" />
-        <CareerRankingColumn
-          type={CareerRankingType.StableLevel}
-          title="安定段位"
-          formatter={(_, metadata, modes) =>
-            PlayerMetadata.estimateStableLevel2({ ...metadata, level: metadata.ranking_level }, modes[0])
-          }
-          disableMixedMode
-        />
       </CareerRanking>
-    </RouteDef>
-    <RouteDef path="career2" title="安定段位" disabled={!SANMA}>
-      <CareerRanking>
-        <CareerRankingColumn
-          type={CareerRankingType.StableLevel}
-          title="安定段位"
-          formatter={(_, metadata, modes) =>
-            PlayerMetadata.estimateStableLevel({ ...metadata, level: metadata.ranking_level }, modes[0])
-          }
-          disableMixedMode
-        />
-      </CareerRanking>
-    </RouteDef>
-    <RouteDef path="maxlevel" title="最高等级">
-      <CareerRankingPlain>
-        <CareerRankingColumn
-          type={CareerRankingType.MaxLevelGlobal}
-          title="最高等级"
-          forceMode={0}
-          showNumGames={false}
-          formatter={(_, metadata) => `${LevelWithDelta.format(metadata.max_level)}`}
-        />
-      </CareerRankingPlain>
     </RouteDef>
     <RouteDef path="career3" title="平均顺位/对局数">
       <CareerRanking>

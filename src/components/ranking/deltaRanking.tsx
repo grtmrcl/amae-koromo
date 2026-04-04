@@ -3,7 +3,7 @@ import { useAsyncFactory } from "../../utils/async";
 import { getDeltaRanking } from "../../data/source/misc";
 import Loading from "../misc/loading";
 import { generatePlayerPathById } from "../gameRecords/routeUtils";
-import { GameMode, LevelWithDelta } from "../../data/types";
+import { GameMode } from "../../data/types";
 import { useModel, ModelModeSelector, ModelModeProvider } from "../modeModel";
 import { useTranslation } from "react-i18next";
 import Conf from "../../utils/conf";
@@ -32,7 +32,7 @@ function RankingTable({ rows = [] as DeltaRankingItem[] }) {
             <TableRow key={x.id}>
               <TableCell>
                 <Link href={generatePlayerPathById(x.id)}>
-                  [{LevelWithDelta.getTag(x.level)}] {x.nickname}
+                  {x.nickname}
                 </Link>
               </TableCell>
               <TableCell sx={{ textAlign: "right" }}>{x.delta}</TableCell>

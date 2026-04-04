@@ -1,4 +1,3 @@
-import { LevelWithDelta } from "./level";
 import { PlayerMetadata } from "./metadata";
 
 export enum RankingTimeSpan {
@@ -10,7 +9,6 @@ export enum RankingTimeSpan {
 export type DeltaRankingItem = {
   id: number;
   nickname: string;
-  level: LevelWithDelta;
   delta: number;
 };
 export type DeltaRankingResponse = {
@@ -22,7 +20,6 @@ export type DeltaRankingResponse = {
 };
 export interface CareerRankingItem extends PlayerMetadata {
   rank_key: number;
-  ranking_level: LevelWithDelta;
   count: number;
 }
 export enum CareerRankingType {

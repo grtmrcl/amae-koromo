@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from "react";
-import { LevelWithDelta, PlayerMetadata } from "../../../data/types";
+import { PlayerMetadata } from "../../../data/types";
 import { loadPreference, savePreference } from "../../../utils/preference";
 
 type StarredPlayer = {
   id: number;
   name: string;
-  levelId: number;
   timestamp: number;
 };
 
@@ -63,14 +62,12 @@ export default function StarPlayerProvider({ children }: { children: React.React
       const newStarredPlayer = {
         id: player.id,
         name: player.nickname,
-        levelId: LevelWithDelta.getAdjustedLevel(player.level).toLevelId(),
         timestamp: Date.now(),
       };
       const index = starredPlayers.list.findIndex((item) => item.id === newStarredPlayer.id);
       if (
         index === 0 &&
-        starredPlayers.list[0].name === newStarredPlayer.name &&
-        starredPlayers.list[0].levelId === newStarredPlayer.levelId
+        starredPlayers.list[0].name === newStarredPlayer.name
       ) {
         return;
       }

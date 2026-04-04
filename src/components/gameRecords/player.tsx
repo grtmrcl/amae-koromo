@@ -3,7 +3,7 @@ import { Link, Typography, TypographyProps, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { GameRecord, PlayerRecord, getLevelTag } from "../../data/types";
+import { GameRecord, PlayerRecord } from "../../data/types";
 import Conf from "../../utils/conf";
 import { useGameLinkActions } from "./gameLinkActions";
 import { generatePlayerPathById } from "./routeUtils";
@@ -25,7 +25,7 @@ export const Player = React.memo(function ({
   const { t } = useTranslation();
   const theme = useTheme();
   const { open } = useGameLinkActions();
-  const { nickname, level, score, accountId } = player;
+  const { nickname, score, accountId } = player;
   const isTop = GameRecord.getRankIndexByPlayer(game, player) === 0;
   return (
     <Typography
@@ -49,7 +49,7 @@ export const Player = React.memo(function ({
         display="block"
         color="inherit"
       >
-        [{getLevelTag(level)}] {nickname} {score !== undefined && `[${score}]`}
+        {nickname} {score !== undefined && `[${score}]`}
       </Link>
       {!hideDetailIcon && (
         <Link

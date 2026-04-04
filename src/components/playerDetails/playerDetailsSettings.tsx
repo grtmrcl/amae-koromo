@@ -47,9 +47,6 @@ export default function PlayerDetailsSettings({ showLevel = false, availableMode
         start={model.startDate || null}
         end={model.endDate || null}
         limit={model.limit || null}
-        isThrone={model.selectedModes?.some((x) =>
-          [GameMode.王座, GameMode.王东, GameMode.三王座, GameMode.三王东].includes(x)
-        )}
         onSelectDate={(start, end) =>
           updateModel({
             type: "player",

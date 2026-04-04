@@ -12,7 +12,6 @@ import { getZoneFromLocale } from "./zone";
 export interface PlayerRecord {
   accountId: number;
   nickname: string;
-  level: number;
   score: number;
   gradingScore?: number;
 }
