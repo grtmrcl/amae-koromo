@@ -2,7 +2,6 @@ import React from "react";
 
 import { Container } from "../layout";
 import { Alert } from "../misc/alert";
-import Conf from "../../utils/conf";
 import { useTranslation } from "react-i18next";
 import { AlertTitle, styled } from "@mui/material";
 
@@ -24,10 +23,7 @@ function AlertDefault() {
         <li>记录包含雀魂段位战金之间、玉之间及王座之间的牌谱。</li>
         <li>页面不是实时更新，对局一般会在结束后数分钟至数小时内出现。</li>
         <li>对局数据收集从 2019 年 11 月 29 日开始（玉南及王座南为 2019 年 8 月 23 日），之前的对局已无法获取。</li>
-        <li>
-          网站主线路会收集少量匿名浏览数据作后续改进及优化之用，如不希望被收集数据，请使用
-          <a href={Conf.mirrorUrl}>镜像线路</a>。
-        </li>
+
         <li>
           如有问题或建议，请戳 <a href="mailto:i@sapika.ch">SAPikachu (i@sapika.ch)</a> 或{" "}
           <a href="https://github.com/SAPikachu/amae-koromo/">提交 Issue</a>。
@@ -64,10 +60,7 @@ function AlertEn() {
           Data collection was started from 2019-11-29 (2019-08-23 for Jade South and Throne South matches), matches
           finished before then could no longer be retrived.
         </li>
-        <li>
-          Main mirror of the site collects small amount of anonymous usage data for improving the site. If you wish to
-          opt-out from this, please use <a href={Conf.mirrorUrl}>the alternative mirror</a>.
-        </li>
+
         <li>
           If you have any question or suggestion, feel free to email{" "}
           <a href="mailto:i@sapika.ch">SAPikachu (i@sapika.ch)</a> or{" "}
@@ -101,11 +94,7 @@ function AlertJa() {
           データの収集は 2019 年 11 月 29 日から（玉南と王座南は 2019 年 8 月 23
           日）です。収集開始以前の対局は検索できません。
         </li>
-        <li>
-          <a href={"https://" + Conf.canonicalDomain}>メインサイト</a>
-          はサービス向上のため、少しの匿名化された利用情報を収集しています。希望しない方は、
-          <a href={Conf.mirrorUrl}>ミラーサイト</a>をご利用ください。
-        </li>
+
         <li>
           内容の誤り・誤植等はご報告いただけますと幸いです。 <a href="mailto:i@sapika.ch">SAPikachu (i@sapika.ch)</a>{" "}
           または <a href="https://github.com/SAPikachu/amae-koromo/">GitHub</a> でご連絡ください。
@@ -137,10 +126,7 @@ function AlertKo() {
           데이터 수집은 2019년 11월 29일부터(옥탁 반장과 왕좌탁 반장은 2019년 8월 23일) 시작되었습니다. 수집 개시 이전의
           대국은 검색할 수 없습니다.
         </li>
-        <li>
-          <a href={"https://" + Conf.canonicalDomain}>메인 사이트</a>는 서비스 향상을 위해 약간의 익명 사용 데이터를
-          수집하고 있습니다. 원치 않는 분은 <a href={Conf.mirrorUrl}>미러 사이트</a>를 이용해 주십시오.
-        </li>
+
         <li>
           잘못된 내용 등이 있는 경우 <a href="mailto:i@sapika.ch">SAPikachu (i@sapika.ch)</a> 또는{" "}
           <a href="https://github.com/SAPikachu/amae-koromo/">GitHub</a>로 연락해주시길 바랍니다.
