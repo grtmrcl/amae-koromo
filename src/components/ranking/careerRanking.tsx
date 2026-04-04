@@ -6,7 +6,7 @@ import { useAsyncFactory } from "../../utils/async";
 import { getCareerRanking } from "../../data/source/misc";
 import Loading from "../misc/loading";
 import { generatePlayerPathById } from "../gameRecords/routeUtils";
-import { LevelWithDelta, GameMode } from "../../data/types";
+import { GameMode } from "../../data/types";
 import { formatPercent } from "../../utils/index";
 import { ModelModeProvider, ModelModeSelector, useModel } from "../modeModel";
 import { useTranslation } from "react-i18next";
@@ -69,7 +69,7 @@ function RankingTable({
               <TableCell sx={{ textAlign: "right" }}>{index + 1}</TableCell>
               <TableCell>
                 <Link href={generatePlayerPathById(x.id)}>
-                  [{LevelWithDelta.getTag(x.level)}] {x.nickname}
+                  {x.nickname}
                 </Link>
               </TableCell>
               {showNumGames && <TableCell sx={{ textAlign: "right" }}>{x.count}</TableCell>}

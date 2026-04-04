@@ -3,24 +3,17 @@ import i18n from "../../i18n";
 const t = i18n.getFixedT(null, "gameModeShort");
 
 export enum GameMode {
-  王座 = 16,
-  玉 = 12,
-  金 = 9,
-  王东 = 15,
-  玉东 = 11,
-  金东 = 8,
-  三金 = 22,
-  三玉 = 24,
-  三王座 = 26,
-  三金东 = 21,
-  三玉东 = 23,
-  三王东 = 25,
+  友人 = 1,
+  友人特殊 = 2,
 }
 export function modeLabelNonTranslated(mode: GameMode) {
   if (!mode) {
     return "全部";
   }
-  return GameMode[mode].replace(/^三/, "");
+  if (mode === GameMode.友人特殊) {
+    return "友人(特殊)";
+  }
+  return "友人";
 }
 export function modeLabel(mode: GameMode) {
   return t(modeLabelNonTranslated(mode));

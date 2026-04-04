@@ -105,7 +105,7 @@ export const COLUMN_GAMEMODE = makeColumn(
     Conf.table.showGameMode && (
       <Column
         dataKey="modeId"
-        label={<Trans>等级</Trans>}
+        label={<Trans>模式</Trans>}
         cellRenderer={cellFormatGameMode}
         width={40}
         columnData={{

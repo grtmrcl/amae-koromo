@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useDataAdapter } from "../gameRecords/dataAdapterProvider";
-import { PlayerRecord, RankRates, GameRecord, calculateDeltaPoint, Level } from "../../data/types";
+import { PlayerRecord, RankRates, GameRecord } from "../../data/types";
 import Loading from "../misc/loading";
 import { generatePlayerPathById } from "../gameRecords/routeUtils";
 import { formatPercent, formatFixed3 } from "../../utils";
@@ -27,8 +27,6 @@ type RateItem = {
   count: number;
   resultSelf: RankRates;
   resultOpponent: RankRates;
-  pointSelf: number;
-  pointOpponent: number;
   win: number;
 };
 const StyledTable = styled(Table)(({ theme }) => ({
@@ -74,11 +72,6 @@ function TipTable({ item }: { item: RateItem }) {
             <TableCell>{t("平均顺位")}</TableCell>
             <TableCell>{formatFixed3(RankRates.getAvg(item.resultSelf))}</TableCell>
             <TableCell>{formatFixed3(RankRates.getAvg(item.resultOpponent))}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>{t("平均得点")}</TableCell>
-            <TableCell>{formatFixed3(item.pointSelf / item.count)}</TableCell>
-            <TableCell>{formatFixed3(item.pointOpponent / item.count)}</TableCell>
           </TableRow>
           {["一", "二", "三", "四"].slice(0, item.resultSelf.length).map((label, index) => (
             <TableRow key={index}>
@@ -132,8 +125,6 @@ export function SameMatchRateTable({ numGames = 100, numDisplay = 12, currentAcc
             count: 0,
             resultSelf: new Array<number>(game.players.length).fill(0) as RankRates,
             resultOpponent: new Array<number>(game.players.length).fill(0) as RankRates,
-            pointSelf: 0,
-            pointOpponent: 0,
             win: 0,
           };
         }
@@ -145,24 +136,6 @@ export function SameMatchRateTable({ numGames = 100, numDisplay = 12, currentAcc
         entry.resultOpponent[opponentRank]++;
         if (selfRank < opponentRank) {
           entry.win++;
-        }
-        if (game.modeId) {
-          entry.pointSelf += calculateDeltaPoint(
-            currentPlayer.score,
-            selfRank,
-            game.modeId,
-            new Level(currentPlayer.level),
-            true,
-            true
-          );
-          entry.pointOpponent += calculateDeltaPoint(
-            player.score,
-            opponentRank,
-            game.modeId,
-            new Level(player.level),
-            true,
-            true
-          );
         }
       }
     }

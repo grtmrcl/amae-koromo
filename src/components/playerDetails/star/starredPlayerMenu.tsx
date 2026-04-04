@@ -5,7 +5,6 @@ import { MenuButton } from "../../misc/menuButton";
 import { generatePlayerPathById } from "../../gameRecords/routeUtils";
 import { useStarPlayer } from "./starPlayerProvider";
 import { ArrowDropDown, Star } from "@mui/icons-material";
-import { Level } from "../../../data/types";
 import { LinkBehavior } from "../../misc/linkBehavior";
 import { useTranslation } from "react-i18next";
 
@@ -25,7 +24,7 @@ const StarredPlayerMenu = React.memo(function () {
                 >
                   {starredPlayers.map((p) => (
                     <MenuItem key={p.id} href={generatePlayerPathById(p.id)} component={LinkBehavior}>
-                      [{new Level(p.levelId).getTag()}] {p.name}
+                      {p.name}
                     </MenuItem>
                   ))}
                 </MenuButton>

@@ -1,11 +1,10 @@
 import { ResponsiveContainer, LineChart, Line, Dot, Tooltip, YAxis, TooltipProps } from "recharts";
 
 import { IDataAdapter } from "../../gameRecords/dataAdapterProvider";
-import { GameRecord, Level, modeLabel, getRankLabelByIndex } from "../../../data/types";
+import { GameRecord, modeLabel, getRankLabelByIndex } from "../../../data/types";
 import { useMemo } from "react";
 import { Player } from "../../gameRecords/player";
 import Loading from "../../misc/loading";
-import { calculateDeltaPoint } from "../../../data/types/metadata";
 import { useIsMobile } from "../../../utils/index";
 import Conf from "../../../utils/conf";
 import { alpha, Box, styled, Typography } from "@mui/material";
@@ -128,10 +127,7 @@ const RecentRankChart = React.memo(function ({
         continue;
       }
       const playerRecord = game.players.filter((x) => x.accountId.toString() === playerId.toString())[0];
-      point.delta =
-        typeof playerRecord.gradingScore === "number"
-          ? playerRecord.gradingScore
-          : calculateDeltaPoint(playerRecord.score, point.rank, game.modeId, new Level(playerRecord.level));
+      point.delta = typeof playerRecord.gradingScore === "number" ? playerRecord.gradingScore : 0;
       delta += point.delta;
       point.cumulativeDelta = delta;
     }

@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { triggerRelayout, formatPercent, formatFixed3, formatRound, formatIdentity } from "../../utils/index";
 import { useAsync } from "../../utils/async";
 import {
-  LevelWithDelta,
   PlayerExtendedStats,
   PlayerMetadata,
   GameRecord,
@@ -18,8 +17,6 @@ import {
 import Loading from "../misc/loading";
 import PlayerDetailsSettings from "./playerDetailsSettings";
 import StatItem, { StatList } from "./statItem";
-import EstimatedStableLevel from "./estimatedStableLevel";
-import { Level } from "../../data/types/level";
 import { ViewRoutes, RouteDef, SimpleRoutedSubViews, NavButtons, ViewSwitch } from "../routing";
 import SameMatchRate from "./sameMatchRate";
 import { Trans, useTranslation } from "react-i18next";
@@ -128,18 +125,6 @@ function PlayerExtendedStatsView({ stats }: { stats: PlayerExtendedStats }) {
   );
 }
 
-function fixMaxLevel(level: LevelWithDelta): LevelWithDelta {
-  const levelObj = new Level(level.id);
-  if (level.score + level.delta < levelObj.getStartingPoint()) {
-    return {
-      id: level.id,
-      score: levelObj.getStartingPoint(),
-      delta: 0,
-    };
-  }
-  return level;
-}
-
 function MoreStats({
   stats,
   metadata,
@@ -152,16 +137,6 @@ function MoreStats({
   const { t } = useTranslation();
   return (
     <>
-      {!hasAdvancedParams && (
-        <>
-          <StatItem label="最高等级">
-            {LevelWithDelta.getTag(metadata.cross_stats?.max_level || metadata.max_level)}
-          </StatItem>
-          <StatItem label="最高分数">
-            {LevelWithDelta.formatAdjustedScore(fixMaxLevel(metadata.cross_stats?.max_level || metadata.max_level))}
-          </StatItem>
-        </>
-      )}
       <GenericStat stats={stats} formatter={formatIdentity} formatterHistogram={formatFixed3} statKey="最大连庄" />
       <GenericStat stats={stats} formatter={formatPercent} statKey="里宝率" description="中里宝局数 / 立直和了局数" />
       <GenericStat
@@ -344,10 +319,6 @@ function BasicStats({ metadata, hasAdvancedParams }: { metadata: PlayerMetadata;
   return (
     <>
       <StatItem label="记录场数">{metadata.count}</StatItem>
-      <StatItem label="记录等级">{LevelWithDelta.getTag(metadata.cross_stats?.level || metadata.level)}</StatItem>
-      <StatItem label="记录分数">
-        {LevelWithDelta.formatAdjustedScore(metadata.cross_stats?.level || metadata.level)}
-      </StatItem>
       <ExtendedStatsViewAsync
         metadata={metadata}
         view={PlayerExtendedStatsView}
@@ -355,7 +326,6 @@ function BasicStats({ metadata, hasAdvancedParams }: { metadata: PlayerMetadata;
       />
       <StatItem label="平均顺位">{metadata.avg_rank.toFixed(3)}</StatItem>
       <StatItem label="被飞率">{formatPercent(metadata.negative_rate)}</StatItem>
-      {!hasAdvancedParams && <EstimatedStableLevel metadata={metadata} />}
     </>
   );
 }

@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect, useState, useMemo } from "react";
 
-import { LevelWithDelta, Level, getAccountZone } from "../../data/types";
+import { getAccountZone } from "../../data/types";
 import { searchPlayer, PlayerSearchResult } from "../../data/source/misc";
 import { Redirect } from "react-router-dom";
 import { generatePlayerPathById } from "./routeUtils";
 import { useTranslation } from "react-i18next";
 import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import { networkError } from "../../utils/notify";
-import Conf, { CONFIGURATIONS } from "../../utils/conf";
-import Loading from "../misc/loading";
+import Conf from "../../utils/conf";
 
 type PlayerSearchResultExt = PlayerSearchResult & {
   isDeleted?: boolean;
@@ -37,22 +36,8 @@ function findRawResultFromCache(prefix: string): { result: PlayerSearchResultExt
   return null;
 }
 
-function getCrossSiteConf(x: PlayerSearchResultExt) {
-  if (Conf.availableModes.length > 1) {
-    const level = new Level(x.level.id);
-    if (!Conf.availableModes.some((mode) => level.isAllowedMode(mode))) {
-      return level.getNumPlayerId() === 2 ? CONFIGURATIONS.ikeda : CONFIGURATIONS.DEFAULT;
-    }
-  }
-  return null;
-}
-function getOptionLabel(x: PlayerSearchResultExt, t: (x: string) => string): string {
-  let ret = `[${LevelWithDelta.getTag(x.level)}] ${x.nickname}`;
-  const conf = getCrossSiteConf(x);
-  if (conf) {
-    ret = `[${conf.rankColors.length === 3 ? t("三麻") : t("四麻")}] ${ret}`;
-  }
-  return ret;
+function getOptionLabel(x: PlayerSearchResultExt, _t: (x: string) => string): string {
+  return x.nickname;
 }
 export function PlayerSearch() {
   const { t } = useTranslation("form");
@@ -134,11 +119,6 @@ export function PlayerSearch() {
     };
   }, [searchText, isLoading]);
   if (selectedItem) {
-    const crossSiteConf = getCrossSiteConf(selectedItem);
-    if (crossSiteConf) {
-      location.href = `https://${crossSiteConf.canonicalDomain}${generatePlayerPathById(selectedItem.id)}`;
-      return <Loading />;
-    }
     return <Redirect to={generatePlayerPathById(selectedItem.id)} push />;
   }
   return (

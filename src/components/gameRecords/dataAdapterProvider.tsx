@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 import { DataProvider, DUMMY_DATA_PROVIDER, FilterPredicate } from "../../data/source/records/provider";
 import { useModel, Model } from "./model";
-import { Metadata, GameRecord, Level } from "../../data/types";
+import { Metadata, GameRecord } from "../../data/types";
 import { generatePath } from "./routeUtils";
 import { networkError } from "../../utils/notify";
 import { ApiError } from "../../data/source/api";
@@ -170,7 +170,7 @@ function usePredicate(model: Model): FilterPredicate {
   let memoFunc: () => FilterPredicate = () => null;
   const searchText = (model.searchText || "").trim().toLowerCase() || "";
   const needPredicate =
-    searchText || ("rank" in model && model.rank) || ("kontenOnly" in model && model.kontenOnly) || extraPredicate;
+    searchText || ("rank" in model && model.rank) || extraPredicate;
   memoFunc = () =>
     needPredicate
       ? (game) => {
@@ -179,9 +179,6 @@ function usePredicate(model: Model): FilterPredicate {
           }
           if ("rank" in model) {
             if (model.rank && GameRecord.getRankIndexByPlayer(game, model.playerId) !== model.rank - 1) {
-              return false;
-            }
-            if (model.kontenOnly && !game.players.every((x) => new Level(x.level).isKonten())) {
               return false;
             }
           }
@@ -195,7 +192,6 @@ function usePredicate(model: Model): FilterPredicate {
     (model.type === undefined && model.selectedMode) || null,
     searchText,
     "rank" in model && model.rank,
-    "kontenOnly" in model && model.kontenOnly,
     extraPredicate,
   ];
   // eslint-disable-next-line react-hooks/exhaustive-deps

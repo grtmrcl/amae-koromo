@@ -39,9 +39,6 @@ export function generatePath(model: Model): string {
     if (model.rank) {
       params.set("rank", model.rank.toString());
     }
-    if (model.kontenOnly) {
-      params.set("kontenOnly", "1");
-    }
     if (model.limit) {
       params.set("limit", model.limit.toString());
     }
@@ -73,7 +70,6 @@ export function generatePlayerPathById(playerId: number | string): string {
     selectedModes: [],
     searchText: "",
     rank: null,
-    kontenOnly: false,
     limit: null,
   });
 }

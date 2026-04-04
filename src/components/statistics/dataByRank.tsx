@@ -5,7 +5,6 @@ import { useAsyncFactory } from "../../utils/async";
 import { getGlobalStatistics, getGlobalStatisticsSnapshot, getGlobalStatisticsYear } from "../../data/source/misc";
 import Loading from "../misc/loading";
 import { useModel } from "../modeModel/model";
-import { Level } from "../../data/types/level";
 import { ModelModeSelector } from "../modeModel";
 import { useTranslation } from "react-i18next";
 import Conf from "../../utils/conf";
@@ -106,7 +105,7 @@ export default function DataByRank() {
   const modes = useMemo(
     () =>
       model.selectedModes
-        .filter((x) => (Conf.features.statisticsSubPages.dataByRank || []).includes(x))
+        .filter((x) => ((Conf.features.statisticsSubPages.dataByRank as GameMode[] | false) || []).includes(x))
         .sort((a, b) => a - b),
     [model]
   );
@@ -194,7 +193,7 @@ export default function DataByRank() {
               <TableBody>
                 {modeData.map(([levelId, levelData]) => (
                   <TableRow key={levelId}>
-                    <TableCell className="text-nowrap">{new Level(parseInt(levelId)).getTag()}</TableCell>
+                    <TableCell className="text-nowrap">{levelId}</TableCell>
                     {levelData.basic.rank_rates.slice(0, Conf.rankColors.length).map((x, i) => (
                       <TableCell key={i}>{formatPercent(x)}</TableCell>
                     ))}
@@ -226,7 +225,7 @@ export default function DataByRank() {
               <TableBody>
                 {modeData.map(([levelId, levelData]) => (
                   <TableRow key={levelId}>
-                    <TableCell className="text-nowrap">{new Level(parseInt(levelId)).getTag()}</TableCell>
+                    <TableCell className="text-nowrap">{levelId}</TableCell>
                     <TableCell>{levelData.extended.平均打点}</TableCell>
                     <TableCell>{levelData.extended.平均铳点}</TableCell>
                     <TableCell>{levelData.extended.打点效率}</TableCell>

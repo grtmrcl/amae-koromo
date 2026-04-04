@@ -10,7 +10,7 @@ import { CareerRankingItem, CareerRankingType } from "../types/ranking";
 import { GlobalStatistics, FanStats, GlobalHistogram, LevelStatistics } from "../types/statistics";
 
 
-export type PlayerSearchResult = Pick<PlayerMetadataLite, "id" | "nickname" | "level"> & {
+export type PlayerSearchResult = Pick<PlayerMetadataLite, "id" | "nickname"> & {
   latest_timestamp: number;
 };
 export async function searchPlayer(prefix: string, limit = 20): Promise<PlayerSearchResult[]> {

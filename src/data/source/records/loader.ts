@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
 import { GameRecord, GameRecordWithEvent } from "../../types/record";
-import { Metadata, PlayerMetadata, PlayerExtendedStats, MODE_BASE_POINT } from "../../types/metadata";
+import { Metadata, PlayerMetadata, PlayerExtendedStats } from "../../types/metadata";
 import { apiCacheablePost, apiGet } from "../api";
 import { GameMode } from "../../types";
 import Conf from "../../../utils/conf";
@@ -105,13 +105,6 @@ export class ListingDataLoader implements DataLoader<Metadata> {
 
 function processExtendedStats(stats: PlayerMetadata): (value: PlayerExtendedStats) => PlayerExtendedStats {
   return (extendedStats) => {
-    const gameBasePoint = MODE_BASE_POINT[Conf.availableModes[0]];
-    if (gameBasePoint) {
-      extendedStats.局收支 =
-        ((stats.rank_rates.reduce((acc, x, index) => acc + x * stats.rank_avg_score[index], 0) - gameBasePoint) *
-          stats.count) /
-        extendedStats.count;
-    }
     stats.extended_stats = extendedStats;
     return extendedStats;
   };
@@ -170,8 +163,6 @@ export class PlayerDataLoader implements DataLoader<PlayerMetadata> {
     }
     stats.cross_stats = {
       id: crossStats.id,
-      level: crossStats.level,
-      max_level: crossStats.max_level,
       played_modes:
         crossStats.played_modes
           ?.map((x) => (typeof x === "string" ? (parseInt(x, 10) as GameMode) : x))
@@ -244,8 +235,6 @@ export class FilteredPlayerDataLoader implements DataLoader<PlayerMetadata> {
     const crossStats = stats;
     stats.cross_stats = {
       id: crossStats.id,
-      level: crossStats.level,
-      max_level: crossStats.max_level,
       played_modes:
         crossStats.played_modes
           ?.map((x) => (typeof x === "string" ? (parseInt(x, 10) as GameMode) : x))

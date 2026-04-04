@@ -20,7 +20,6 @@ export interface PlayerModel {
   selectedModes: GameMode[];
   searchText: string;
   rank: number | null;
-  kontenOnly: boolean;
   limit: number | null;
 }
 export type Model = ListingModel | PlayerModel;
@@ -36,7 +35,6 @@ export const Model = Object.freeze({
         endDate: null,
         searchText: "",
         rank: null,
-        kontenOnly: false,
         limit: null,
       };
     }
@@ -48,7 +46,7 @@ export const Model = Object.freeze({
     };
   },
   hasAdvancedParams(model: Model): boolean {
-    return Boolean("rank" in model && (model.searchText || model.rank || model.kontenOnly));
+    return Boolean("rank" in model && (model.searchText || model.rank));
   },
 });
 type ModelUpdate = Partial<ListingModel> | ({ type: "player" } & Partial<PlayerModel>);

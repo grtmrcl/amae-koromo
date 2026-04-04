@@ -21,7 +21,6 @@ type PlayerRouteParams = {
   mode?: string;
   search?: string;
   rank?: string;
-  kontenOnly?: string;
   limit?: string;
 };
 
@@ -66,7 +65,6 @@ const ModelBuilders = {
       selectedModes,
       searchText: params.search ? params.search.slice(1) : "",
       rank: parseInt(params.rank || "") || null,
-      kontenOnly: !!params.kontenOnly,
       limit: parseInt(params.limit || "", 10) || null,
     };
   },
@@ -97,7 +95,6 @@ export function RouteSync({ view }: { view: keyof typeof ModelBuilders }): React
   const query = new URLSearchParams(location.search);
   Object.assign(params, {
     rank: query.get("rank"),
-    kontenOnly: query.get("kontenOnly"),
     limit: query.get("limit"),
   });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
