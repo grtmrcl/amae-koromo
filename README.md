@@ -22,6 +22,18 @@ docker compose up -d
 docker compose build
 ```
 
+## デプロイ
+
+`master` ブランチへのプッシュで GitHub Actions が自動的にEC2へデプロイします。
+
+必要なシークレット（リポジトリのSettings > Secrets and variables > Actions）:
+
+| シークレット名 | 説明 |
+|--------------|------|
+| `EC2_HOST` | EC2のIPまたはドメイン |
+| `EC2_USER` | SSHユーザー名 |
+| `EC2_SSH_KEY` | SSH秘密鍵 |
+
 ## ローカル開発
 
 ```bash
