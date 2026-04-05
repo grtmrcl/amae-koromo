@@ -8,7 +8,6 @@ import {
   ButtonGroup,
   Container,
   Toolbar,
-  MenuItem,
   ButtonProps,
   Box,
   IconButton,
@@ -23,12 +22,11 @@ import {
   ListItem,
   ThemeOptions,
 } from "@mui/material";
-import { ArrowDropDown, Language, GitHub, Twitter, Menu as MenuIcon } from "@mui/icons-material";
+import { GitHub, Twitter, Menu as MenuIcon } from "@mui/icons-material";
 import { OverrideTheme } from "./theme";
 import clsx from "clsx";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import NavButton from "../misc/navButton";
-import { MenuButton } from "../misc/menuButton";
 import StarredPlayerMenu from "../playerDetails/star/starredPlayerMenu";
 
 const NAV_ITEMS = [
@@ -43,13 +41,6 @@ const SITE_LINKS = [
   ["四麻", CONFIGURATIONS.DEFAULT.canonicalDomain],
   ["三麻", CONFIGURATIONS.ikeda.canonicalDomain],
 ].map(([label, domain]) => ({ label, domain, active: Conf.canonicalDomain === domain }));
-
-const LANGUAGES = [
-  ["中文", "zh-hans"],
-  ["日本語", "ja"],
-  ["English", "en"],
-  ["한국어", "ko"],
-].map(([label, code]) => ({ label, code }));
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isActive(match: any, location: Location): boolean {
@@ -88,7 +79,7 @@ function handleSwitchSite(e: React.MouseEvent<HTMLAnchorElement>) {
   window.location.href = url.toString();
 }
 function DesktopItems() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       <ButtonGroup>
@@ -113,17 +104,6 @@ function DesktopItems() {
           </Button>
         ))}
       </ButtonGroup>
-      <MenuButton
-        startIcon={<Language />}
-        endIcon={<ArrowDropDown />}
-        label={LANGUAGES.find((x) => x.code === i18n.language)?.label}
-      >
-        {LANGUAGES.map(({ label, code }) => (
-          <MenuItem key={code} onClick={() => i18n.changeLanguage(code)} selected={code === i18n.language}>
-            {label}
-          </MenuItem>
-        ))}
-      </MenuButton>
       <IconButton href="https://twitter.com/AmaeKoromo_MajS">
         <Twitter />
       </IconButton>
@@ -134,7 +114,7 @@ function DesktopItems() {
   );
 }
 function MobileItems() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -160,17 +140,6 @@ function MobileItems() {
                 <ListItemButton selected={active} href={`https://${domain}/`} onClick={handleSwitchSite}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText>{t(label)}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {LANGUAGES.map(({ label, code }) => (
-              <ListItem disablePadding key={code}>
-                <ListItemButton onClick={() => i18n.changeLanguage(code)} selected={code === i18n.language}>
-                  <ListItemIcon></ListItemIcon>
-                  <ListItemText>{label}</ListItemText>
                 </ListItemButton>
               </ListItem>
             ))}
