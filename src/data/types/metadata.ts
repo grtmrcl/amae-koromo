@@ -119,11 +119,6 @@ export type PlayerExtendedStats = {
   铳点损失: number;
   净打点效率: number;
   局收支?: number;
-  最近大铳?: {
-    id: string;
-    start_time: number;
-    fans: FanStatEntryList;
-  };
 };
 export interface Metadata {
   count: number;

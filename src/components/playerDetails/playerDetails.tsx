@@ -375,36 +375,7 @@ function LuckStats({ stats }: { stats: PlayerExtendedStats }) {
     </>
   );
 }
-function LargestLost({ stats, metadata }: { stats: PlayerExtendedStats; metadata: PlayerMetadata }) {
-  const { t } = useTranslation();
-  if (!stats.最近大铳) {
-    return <Typography textAlign="center">{t("无超过满贯大铳")}</Typography>;
-  }
-  return (
-    <Box>
-      <Link
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          fontWeight: "bold",
-        }}
-        href={GameRecord.getRecordLink(stats.最近大铳.id, metadata.id)}
-      >
-        <Box>{FanStatEntryList.formatFanSummary(stats.最近大铳.fans)}</Box>
-        <Box>{GameRecord.formatFullStartTime(stats.最近大铳.start_time)}</Box>
-      </Link>
-      <StatList mt={2}>
-        {stats.最近大铳.fans.map((x) => (
-          <StatItem key={x.label} label={x.label}>
-            {FanStatEntry2.formatFan(x)}
-          </StatItem>
-        ))}
-      </StatList>
-    </Box>
-  );
-}
+
 function PlayerStats({
   metadata,
   isChangingSettings,
@@ -443,9 +414,6 @@ function PlayerStats({
           <StatList>
             <ExtendedStatsViewAsync metadata={metadata} view={LuckStats} hasAdvancedParams={hasAdvancedParams} />
           </StatList>
-        </RouteDef>
-        <RouteDef path="largest-lost" title="最近大铳">
-          <ExtendedStatsViewAsync metadata={metadata} view={LargestLost} hasAdvancedParams={hasAdvancedParams} />
         </RouteDef>
         <RouteDef path="same-match" title="最常同桌">
           {!isChangingSettings ? <SameMatchRate currentAccountId={metadata.id} /> : <></>}
