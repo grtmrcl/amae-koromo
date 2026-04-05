@@ -324,7 +324,7 @@ function BasicStats({ metadata, hasAdvancedParams }: { metadata: PlayerMetadata;
         view={PlayerExtendedStatsView}
         hasAdvancedParams={hasAdvancedParams}
       />
-      <StatItem label="平均顺位">{metadata.avg_rank.toFixed(3)}</StatItem>
+      <StatItem label="平均顺位">{metadata.avg_rank?.toFixed(3)}</StatItem>
       <StatItem label="被飞率">{formatPercent(metadata.negative_rate)}</StatItem>
     </>
   );
@@ -474,7 +474,8 @@ export default function PlayerDetails() {
     if (!metadata) {
       return;
     }
-    if (dataAdapter.getMetadata()?.count === 0) {
+    if (dataAdapter.getMetadata()?.count === 0 ||
+        (latestDataAdapter.hasCount() && latestDataAdapter.getCount() === 0)) {
       setDataAdapter(latestDataAdapter);
       return;
     }

@@ -23,7 +23,7 @@ const createLabelLine = (props: any) =>
 const RankRateChart = React.memo(function ({ metadata, aspect = 1 }: { metadata: PlayerMetadata; aspect?: number }) {
   const { i18n } = useTranslation();
   const ranks = useMemo(
-    () => metadata.rank_rates.map((x, index) => ({ label: getRankLabelByIndex(index), rate: x })),
+    () => (metadata.rank_rates ?? []).map((x, index) => ({ label: getRankLabelByIndex(index), rate: x })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [metadata, i18n.language]
   );
