@@ -1,6 +1,5 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 
 import { triggerRelayout } from "./utils";
 
@@ -14,9 +13,6 @@ i18n
   .use({
     type: "backend",
     read(language: string, namespace: string, callback: (errorValue: unknown, translations: null | unknown) => void) {
-      if (language === "zh-hans") {
-        return callback(null, {});
-      }
       import(`./locales/${language}.json`)
         .then((resources) => {
           resources = resources.default;
@@ -27,19 +23,13 @@ i18n
         });
     },
   })
-  .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
     lowerCaseLng: true,
-    fallbackLng: "zh-hans",
+    lng: "ja",
+    fallbackLng: "ja",
     defaultNS: "default",
     debug: DEBUG,
-    whitelist: ["ja", "zh-hans", "en", "ko"],
-    detection: {
-      order: ["localStorage", "navigator"],
-      caches: ["localStorage"],
-      checkWhitelist: true,
-    },
 
     returnEmptyString: false,
     returnNull: false,
@@ -49,9 +39,6 @@ i18n
       ? function (lng, ns, key) {
           const missingKeys = JSON.parse(sessionStorage.getItem("__i18nMissingKeys") || "{}") || {};
           const l = i18n.language;
-          if (l === "zh-hans") {
-            return;
-          }
           missingKeys[l] = missingKeys[l] || {};
           missingKeys[l][ns] = missingKeys[l][ns] || {};
           missingKeys[l][ns][key] = "";
