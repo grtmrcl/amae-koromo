@@ -239,8 +239,6 @@
     "玩家前缀搜索": "Matching players",
     "（输入更长名字显示其它结果）": "(Input longer names to show other results)",
 
-    "无超过满贯大铳": "No greater-than-mangan deal-in",
-
     "加载数据失败": "Failed to load data",
 
     "https://game.maj-soul.com/1/": "https://mahjongsoul.game.yo-star.com/",
@@ -339,7 +337,6 @@
     "更多": "Others",
     "和铳分布": "Win-lose distribution",
     "血统": "Lucky",
-    "最近大铳": "Recent high loss",
     "最常同桌": "Frequent opponents",
     "最近 100 局": "Last 100 matches",
     "全部": "All",
