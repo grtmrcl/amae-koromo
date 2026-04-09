@@ -199,13 +199,13 @@ export default function DataByRank() {
                     ))}
                     <TableCell>{formatPercent(levelData.basic.negative_rate)}</TableCell>
                     <TableCell>{formatFixed3(levelData.basic.avg_rank)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.和牌率)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.放铳率)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.副露率)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.立直率)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.自摸率)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.流局率)}</TableCell>
-                    <TableCell>{formatPercent(levelData.extended.流听率)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.win_rate)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.deal_in_rate)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.call_rate)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.riichi_rate)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.tsumo_rate)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.draw_rate)}</TableCell>
+                    <TableCell>{formatPercent(levelData.extended.draw_tenpai_rate)}</TableCell>
                     <TableCell>{levelData.basic.count}</TableCell>
                     {haveNumPlayers && <TableCell>{levelData.num_players}</TableCell>}
                   </TableRow>
@@ -226,11 +226,11 @@ export default function DataByRank() {
                 {modeData.map(([levelId, levelData]) => (
                   <TableRow key={levelId}>
                     <TableCell className="text-nowrap">{levelId}</TableCell>
-                    <TableCell>{levelData.extended.平均打点}</TableCell>
-                    <TableCell>{levelData.extended.平均铳点}</TableCell>
-                    <TableCell>{levelData.extended.打点效率}</TableCell>
-                    <TableCell>{levelData.extended.铳点损失}</TableCell>
-                    <TableCell>{levelData.extended.净打点效率}</TableCell>
+                    <TableCell>{levelData.extended.avg_win_point}</TableCell>
+                    <TableCell>{levelData.extended.avg_deal_in_point}</TableCell>
+                    <TableCell>{levelData.extended.win_point_efficiency}</TableCell>
+                    <TableCell>{levelData.extended.deal_in_point_loss}</TableCell>
+                    <TableCell>{levelData.extended.net_point_efficiency}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

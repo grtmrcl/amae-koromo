@@ -104,23 +104,23 @@ function ExtendedStatsViewAsync({
 function PlayerExtendedStatsView({ stats }: { stats: PlayerExtendedStats }) {
   return (
     <>
-      <GenericStat stats={stats} formatter={formatPercent} statKey="和牌率" description="和牌局数 / 总局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="放铳率" description="放铳局数 / 总局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="自摸率" description="自摸局数 / 和牌局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="win_rate" label="和牌率" description="和牌局数 / 总局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="deal_in_rate" label="放铳率" description="放铳局数 / 总局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="tsumo_rate" label="自摸率" description="自摸局数 / 和牌局数" />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="默听率"
+        statKey="damaten_rate"
         label="默胡率"
         description="门清默听和牌局数 / 和牌局数"
       />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="流局率" description="流局局数 / 总局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="流听率" description="流局听牌局数 / 流局局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="副露率" description="副露局数 / 总局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="立直率" description="立直局数 / 总局数" />
-      <GenericStat stats={stats} formatter={formatFixed3} statKey="和了巡数" />
-      <GenericStat stats={stats} formatter={formatRound} statKey="平均打点" />
-      <GenericStat stats={stats} formatter={formatRound} statKey="平均铳点" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="draw_rate" label="流局率" description="流局局数 / 总局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="draw_tenpai_rate" label="流听率" description="流局听牌局数 / 流局局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="call_rate" label="副露率" description="副露局数 / 总局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="riichi_rate" label="立直率" description="立直局数 / 总局数" />
+      <GenericStat stats={stats} formatter={formatFixed3} statKey="avg_win_turn" label="和了巡数" />
+      <GenericStat stats={stats} formatter={formatRound} statKey="avg_win_point" label="平均打点" />
+      <GenericStat stats={stats} formatter={formatRound} statKey="avg_deal_in_point" label="平均铳点" />
     </>
   );
 }
@@ -137,76 +137,87 @@ function MoreStats({
   const { t } = useTranslation();
   return (
     <>
-      <GenericStat stats={stats} formatter={formatIdentity} formatterHistogram={formatFixed3} statKey="最大连庄" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="里宝率" description="中里宝局数 / 立直和了局数" />
+      <GenericStat stats={stats} formatter={formatIdentity} formatterHistogram={formatFixed3} statKey="max_consecutive_dealer" label="最大连庄" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="ura_rate" label="里宝率" description="中里宝局数 / 立直和了局数" />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="被炸率"
+        statKey="bombed_rate"
+        label="被炸率"
         description="被炸庄（满贯或以上）次数 / 被自摸次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
-        statKey="平均被炸点数"
+        statKey="avg_bombed_point"
+        label="平均被炸点数"
         description="被炸庄（满贯或以上）点数 / 次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="放铳时立直率"
+        statKey="deal_in_riichi_rate"
+        label="放铳时立直率"
         description="放铳时立直次数 / 放铳次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="放铳时副露率"
+        statKey="deal_in_call_rate"
+        label="放铳时副露率"
         description="放铳时副露次数 / 放铳次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="副露后放铳率"
+        statKey="call_deal_in_rate"
+        label="副露后放铳率"
         description="放铳时副露次数 / 副露次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="副露后和牌率"
+        statKey="call_win_rate"
+        label="副露后和牌率"
         description="副露后和牌次数 / 副露次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="副露后流局率"
+        statKey="call_draw_rate"
+        label="副露后流局率"
         description="副露后流局次数 / 副露次数"
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
         defaultValue=""
-        statKey="打点效率"
+        statKey="win_point_efficiency"
+        label="打点效率"
         description={`${t("和牌率")} * ${t("平均打点")}`}
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
         defaultValue=""
-        statKey="铳点损失"
+        statKey="deal_in_point_loss"
+        label="铳点损失"
         description={`${t("放铳率")} * ${t("平均铳点")}`}
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
         defaultValue=""
-        statKey="净打点效率"
+        statKey="net_point_efficiency"
+        label="净打点效率"
         description={`${t("和牌率")} * ${t("平均打点")} - ${t("放铳率")} * ${t("平均铳点")}`}
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
         defaultValue=""
-        statKey="局收支"
+        statKey="game_score_balance"
+        label="局收支"
         description={`(${t("场平均素点")} - ${t("场起始素点")}) * ${t("记录场数")} / ${t("总计局数")}`}
       />
       <StatItem label="总计局数">{stats.count}</StatItem>
@@ -216,11 +227,11 @@ function MoreStats({
 function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMetadata }) {
   return (
     <>
-      <GenericStat stats={stats} formatter={formatPercent} statKey="立直率" description="立直局数 / 总局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="riichi_rate" label="立直率" description="立直局数 / 总局数" />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        statKey="立直后和牌率"
+        statKey="riichi_win_rate"
         label="立直和了"
         description="立直和了局数 / 立直局数"
       />
@@ -228,58 +239,62 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
         stats={stats}
         formatter={formatPercent}
         label="立直放铳A"
-        statKey="立直后放铳率"
+        statKey="riichi_deal_in_rate"
         description="立直放铳局数（含立直瞬间） / 立直局数"
       />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
         label="立直放铳B"
-        statKey="立直后非瞬间放铳率"
+        statKey="riichi_deal_in_non_instant_rate"
         description="立直放铳局数（不含立直瞬间） / 立直局数"
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
-        statKey="立直收支"
+        statKey="riichi_point_balance"
+        label="立直收支"
         description="立直总收支（含供托） / 立直局数"
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
-        statKey="立直收入"
+        statKey="riichi_win_income"
+        label="立直收入"
         description="立直和了收入（含供托） / 立直和了局数"
       />
       <GenericStat
         stats={stats}
         formatter={formatRound}
-        statKey="立直支出"
+        statKey="riichi_deal_in_cost"
+        label="立直支出"
         description="立直放铳支出（含立直棒） / 立直放铳局数"
       />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="先制率" description="先制立直局数 / 立直局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="追立率" description="追立局数 / 立直局数" />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="被追率" description="被追立局数 / 立直局数" />
-      <GenericStat stats={stats} formatter={formatFixed3} statKey="立直巡目" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="first_riichi_rate" label="先制率" description="先制立直局数 / 立直局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="chasing_riichi_rate" label="追立率" description="追立局数 / 立直局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="chased_riichi_rate" label="被追率" description="被追立局数 / 立直局数" />
+      <GenericStat stats={stats} formatter={formatFixed3} statKey="avg_riichi_turn" label="立直巡目" />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
         label="立直流局"
-        statKey="立直后流局率"
+        statKey="riichi_draw_rate"
         description="立直流局局数 / 立直局数"
       />
-      <GenericStat stats={stats} formatter={formatPercent} statKey="一发率" description="一发局数 / 立直和了局数" />
+      <GenericStat stats={stats} formatter={formatPercent} statKey="ippatsu_rate" label="一发率" description="一发局数 / 立直和了局数" />
       <GenericStat
         stats={stats}
         formatter={formatPercent}
         label="振听率"
-        statKey="振听立直率"
+        statKey="furiten_riichi_rate"
         description="振听立直局数（不含立直见逃） / 立直局数"
       />
-      {(stats.立直多面 || stats.立直多面 === 0) && (
+      {(stats.riichi_multiway_rate || stats.riichi_multiway_rate === 0) && (
         <GenericStat
           stats={stats}
           formatter={formatPercent}
-          statKey="立直多面"
+          statKey="riichi_multiway_rate"
+          label="立直多面"
           description={
             <Box>
               <Trans>
@@ -293,11 +308,11 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
           }
         />
       )}
-      {(stats.立直好型2 || stats.立直好型2 === 0) && (
+      {(stats.riichi_good_shape_rate2 || stats.riichi_good_shape_rate2 === 0) && (
         <GenericStat
           stats={stats}
           formatter={formatPercent}
-          statKey="立直好型2"
+          statKey="riichi_good_shape_rate2"
           label="立直好型"
           description={
             <Box>
@@ -333,44 +348,44 @@ function LuckStats({ stats }: { stats: PlayerExtendedStats }) {
   return (
     <>
       <StatItem label="役满" description="和出役满次数">
-        {stats.役满 || 0}
+        {stats.yakuman || 0}
       </StatItem>
       <StatItem label="累计役满" description="和出累计役满次数">
-        {stats.累计役满 || 0}
+        {stats.accumulated_yakuman || 0}
       </StatItem>
       <StatItem label="最大累计番数" description="和出的最大番数（不含役满役）">
-        {stats.最大累计番数 || 0}
+        {stats.max_fan_count || 0}
       </StatItem>
       <StatItem label="流满" description="流满次数">
-        {stats.流满 || 0}
+        {stats.ryuuman || 0}
       </StatItem>
       <StatItem label="两立直" description="两立直次数">
-        {stats.W立直 || 0}
+        {stats.w_riichi || 0}
       </StatItem>
-      <GenericStat stats={stats} formatter={formatFixed3} statKey="平均起手向听" label="起手向听" />
+      <GenericStat stats={stats} formatter={formatFixed3} statKey="avg_start_shanten" label="起手向听" />
       <GenericStat
         stats={stats}
         formatter={formatFixed3}
-        statKey="平均起手向听亲"
+        statKey="avg_start_shanten_dealer"
         label="亲起手向听"
         description={
           <Box>
             <Trans values={{ date: "2022/6/27" }} defaults="（数据从 {{date}} 前后开始收集）" />
           </Box>
         }
-        hideValue={!stats?.平均起手向听亲}
+        hideValue={!stats?.avg_start_shanten_dealer}
       />
       <GenericStat
         stats={stats}
         formatter={formatFixed3}
-        statKey="平均起手向听子"
+        statKey="avg_start_shanten_non_dealer"
         label="子起手向听"
         description={
           <Box>
             <Trans values={{ date: "2022/6/27" }} defaults="（数据从 {{date}} 前后开始收集）" />
           </Box>
         }
-        hideValue={!stats?.平均起手向听子}
+        hideValue={!stats?.avg_start_shanten_non_dealer}
       />
     </>
   );

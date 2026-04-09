@@ -47,32 +47,32 @@ const ROUTES = (
     </RouteDef>
     <RouteDef path="career4" title={(t) => `${t("平均打点")}/${t("平均铳点")}`}>
       <CareerRanking>
-        <CareerRankingColumn type={CareerRankingType.平均打点} title="平均打点" formatter={formatRound} />
-        <CareerRankingColumn type={CareerRankingType.平均铳点} title="平均铳点" formatter={formatRound} />
+        <CareerRankingColumn type={CareerRankingType.AvgWinPoint} title="平均打点" formatter={formatRound} />
+        <CareerRankingColumn type={CareerRankingType.AvgDealInPoint} title="平均铳点" formatter={formatRound} />
       </CareerRanking>
     </RouteDef>
     <RouteDef path="career5" title={(t) => `${t("打点效率")}/${t("铳点损失")}`}>
       <CareerRanking>
-        <CareerRankingColumn type={CareerRankingType.打点效率} title="打点效率" formatter={formatRound} />
-        <CareerRankingColumn type={CareerRankingType.铳点损失} title="铳点损失" formatter={formatRound} />
+        <CareerRankingColumn type={CareerRankingType.WinPointEfficiency} title="打点效率" formatter={formatRound} />
+        <CareerRankingColumn type={CareerRankingType.DealInPointLoss} title="铳点损失" formatter={formatRound} />
       </CareerRanking>
     </RouteDef>
     <RouteDef path="netwinefficiency" title="净打点效率">
       <CareerRanking>
         <CareerRankingColumn
-          type={CareerRankingType.净打点效率}
+          type={CareerRankingType.NetPointEfficiency}
           title="净打点效率"
           formatter={formatRound}
           extraColumns={[
             {
               label: "打点效率",
               value: (x) =>
-                x.extended_stats && "count" in x.extended_stats ? formatRound(x.extended_stats.打点效率) : "",
+                x.extended_stats && "count" in x.extended_stats ? formatRound(x.extended_stats.win_point_efficiency) : "",
             },
             {
               label: "铳点损失",
               value: (x) =>
-                x.extended_stats && "count" in x.extended_stats ? formatRound(x.extended_stats.铳点损失) : "",
+                x.extended_stats && "count" in x.extended_stats ? formatRound(x.extended_stats.deal_in_point_loss) : "",
             },
           ]}
         />
@@ -93,12 +93,12 @@ const ROUTES = (
             {
               label: "和牌率",
               value: (x) =>
-                x.extended_stats && "和牌率" in x.extended_stats ? formatPercent(x.extended_stats.和牌率) : "",
+                x.extended_stats && "win_rate" in x.extended_stats ? formatPercent(x.extended_stats.win_rate) : "",
             },
             {
               label: "放铳率",
               value: (x) =>
-                x.extended_stats && "放铳率" in x.extended_stats ? formatPercent(x.extended_stats.放铳率) : "",
+                x.extended_stats && "deal_in_rate" in x.extended_stats ? formatPercent(x.extended_stats.deal_in_rate) : "",
             },
           ]}
         />
@@ -152,21 +152,21 @@ const ROUTES = (
     </RouteDef>
     <RouteDef path="career6" title="局收支">
       <CareerRanking>
-        <CareerRankingColumn type={CareerRankingType.局收支} title="局收支" formatter={formatRound} disableMixedMode />
+        <CareerRankingColumn type={CareerRankingType.GameScoreBalance} title="局收支" formatter={formatRound} disableMixedMode />
       </CareerRanking>
     </RouteDef>
     <RouteDef path="lucky" title="欧洲人">
       <CareerRanking>
-        <CareerRankingColumn showNumGames={false} type={CareerRankingType.被炸率} title="被炸率" />
-        <CareerRankingColumn showNumGames={false} type={CareerRankingType.里宝率} title="里宝率" />
-        <CareerRankingColumn showNumGames={false} type={CareerRankingType.一发率} title="一发率" />
+        <CareerRankingColumn showNumGames={false} type={CareerRankingType.BombedRate} title="被炸率" />
+        <CareerRankingColumn showNumGames={false} type={CareerRankingType.UraRate} title="里宝率" />
+        <CareerRankingColumn showNumGames={false} type={CareerRankingType.IppatsuRate} title="一发率" />
       </CareerRanking>
     </RouteDef>
     <RouteDef path="unlucky" title="非洲人">
       <CareerRanking>
-        <CareerRankingColumn showNumGames={false} type={CareerRankingType.被炸率Rev} title="被炸率" />
-        <CareerRankingColumn showNumGames={false} type={CareerRankingType.里宝率Rev} title="里宝率" />
-        <CareerRankingColumn showNumGames={false} type={CareerRankingType.一发率Rev} title="一发率" />
+        <CareerRankingColumn showNumGames={false} type={CareerRankingType.BombedRateRev} title="被炸率" />
+        <CareerRankingColumn showNumGames={false} type={CareerRankingType.UraRateRev} title="里宝率" />
+        <CareerRankingColumn showNumGames={false} type={CareerRankingType.IppatsuRateRev} title="一发率" />
       </CareerRanking>
     </RouteDef>
   </ViewRoutes>
