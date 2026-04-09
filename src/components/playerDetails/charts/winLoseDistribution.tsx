@@ -26,17 +26,17 @@ const WinLoseDistribution = React.memo(function ({ stats }: { stats: PlayerExten
   const { t } = useTranslation();
   const theme = useTheme();
   const winData = useMemo(
-    () => buildItems(stats, ["立直和了", "副露和了", "默听和了"], ["立直", "副露", "默听"]),
+    () => buildItems(stats, ["riichi_win_count", "call_win_count", "damaten_win_count"], ["立直", "副露", "默听"]),
     [stats]
   );
   const loseData = useMemo(
-    () => buildItems(stats, ["放铳至立直", "放铳至副露", "放铳至默听"], ["立直", "副露", "默听"]),
+    () => buildItems(stats, ["deal_in_to_riichi", "deal_in_to_call", "deal_in_to_damaten"], ["立直", "副露", "默听"]),
     [stats]
   );
   const loseSelfData = useMemo(() => {
-    const result = buildItems(stats, ["放铳时立直率", "放铳时副露率"], ["立直", "副露"], 1);
+    const result = buildItems(stats, ["deal_in_riichi_rate", "deal_in_call_rate"], ["立直", "副露"], 1);
     const selfOther = {
-      value: 1 - (stats.放铳时副露率 || 0) - (stats.放铳时立直率 || 0),
+      value: 1 - (stats.deal_in_call_rate || 0) - (stats.deal_in_riichi_rate || 0),
       outerLabel: "门清",
     } as PieChartItem;
     if (selfOther.value > 0.00001) {
