@@ -38,6 +38,9 @@ const RecentRankChart = Loadable({
 const WinLoseDistribution = Loadable({
   loader: () => import("./charts/winLoseDistribution"),
 });
+const RonStatsView = Loadable({
+  loader: () => import("./charts/ronStats"),
+});
 
 function GenericStat({
   stats,
@@ -432,6 +435,9 @@ function PlayerStats({
         </RouteDef>
         <RouteDef path="same-match" title="最常同桌">
           {!isChangingSettings ? <SameMatchRate currentAccountId={metadata.id} /> : <></>}
+        </RouteDef>
+        <RouteDef path="tile-danger" title="牌危険度">
+          {!isChangingSettings ? <RonStatsView metadata={metadata} /> : <></>}
         </RouteDef>
       </ViewRoutes>
       <NavButtons sx={{ mt: 3 }} replace keepState withQueryString />
