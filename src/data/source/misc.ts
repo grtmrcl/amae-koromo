@@ -81,6 +81,32 @@ export async function getFanStats(): Promise<FanStats> {
   return await apiGet<FanStats>("fan_stats");
 }
 
+export type RonStatsState = "total" | "riichi" | "open" | "other";
+export type RonStatsCategory = "honor" | "terminals" | "near-terminals" | "middle" | "inner" | "five";
+export type RonStats = {
+  [state in RonStatsState]: {
+    [category in RonStatsCategory]: {
+      [junme: string]: number;
+    };
+  };
+};
+
+export async function getRonStats(
+  playerId: number,
+  startDate?: dayjs.ConfigType,
+  endDate?: dayjs.ConfigType,
+  mode = ""
+): Promise<RonStats> {
+  let datePath = "";
+  if (startDate) {
+    datePath += `/${dayjs(startDate).valueOf()}`;
+    if (endDate) {
+      datePath += `/${dayjs(endDate).valueOf()}`;
+    }
+  }
+  return await apiGet<RonStats>(`ron_stats/${playerId}${datePath}?mode=${mode}`);
+}
+
 export async function getRankRateBySeat(): Promise<RankRateBySeat> {
   type RawResponse = [[number, number, number], number][];
   let rawResp = await apiGet<RawResponse>("rank_rate_by_seat");
