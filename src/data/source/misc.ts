@@ -81,7 +81,7 @@ export async function getFanStats(): Promise<FanStats> {
   return await apiGet<FanStats>("fan_stats");
 }
 
-export type RonStatsState = "riichi" | "open" | "tenpai";
+export type RonStatsState = "total" | "riichi" | "open" | "other";
 export type RonStatsCategory = "honor" | "terminals" | "near-terminals" | "middle" | "inner" | "five";
 export type RonStats = {
   [state in RonStatsState]: {

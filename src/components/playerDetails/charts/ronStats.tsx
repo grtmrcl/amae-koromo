@@ -22,11 +22,11 @@ const CATEGORIES: RonStatsCategory[] = ["honor", "terminals", "near-terminals", 
 
 const CATEGORY_LABELS: Record<RonStatsCategory, string> = {
   honor: "字牌",
-  terminals: "老頭牌(1,9)",
-  "near-terminals": "準老頭(2,8)",
-  middle: "中張(3,7)",
-  inner: "内側(4,6)",
-  five: "五",
+  terminals: "19牌",
+  "near-terminals": "28牌",
+  middle: "37牌",
+  inner: "46牌",
+  five: "5牌",
 };
 
 const CATEGORY_COLORS: Record<RonStatsCategory, string> = {
@@ -39,9 +39,10 @@ const CATEGORY_COLORS: Record<RonStatsCategory, string> = {
 };
 
 const STATE_LABELS: Record<RonStatsState, string> = {
+  total: "合計",
   riichi: "立直",
   open: "副露",
-  tenpai: "黙聴",
+  other: "門前",
 };
 
 const MAX_JUNME = 18;
@@ -144,14 +145,17 @@ export default function RonStatsView({ metadata }: { metadata: PlayerMetadata })
     <Box>
       <SimpleRoutedSubViews>
         <ViewRoutes>
+          <RouteDef path="total" title={STATE_LABELS.total}>
+            <RonStatsChart playerId={metadata.id} state="total" />
+          </RouteDef>
           <RouteDef path="riichi" title={STATE_LABELS.riichi}>
             <RonStatsChart playerId={metadata.id} state="riichi" />
           </RouteDef>
           <RouteDef path="open" title={STATE_LABELS.open}>
             <RonStatsChart playerId={metadata.id} state="open" />
           </RouteDef>
-          <RouteDef path="tenpai" title={STATE_LABELS.tenpai}>
-            <RonStatsChart playerId={metadata.id} state="tenpai" />
+          <RouteDef path="other" title={STATE_LABELS.other}>
+            <RonStatsChart playerId={metadata.id} state="other" />
           </RouteDef>
         </ViewRoutes>
         <NavButtons sx={{ mt: 1 }} />
