@@ -97,9 +97,14 @@ export async function getRonStats(
   endDate?: dayjs.ConfigType,
   mode = ""
 ): Promise<RonStats> {
-  let start = startDate ? dayjs(startDate).valueOf() : dayjs().subtract(180, "day").valueOf();
-  let end = endDate ? dayjs(endDate).valueOf() : dayjs().valueOf();
-  return await apiGet<RonStats>(`ron_stats/${playerId}/${start}/${end}?mode=${mode}`);
+  let datePath = "";
+  if (startDate) {
+    datePath += `/${dayjs(startDate).valueOf()}`;
+    if (endDate) {
+      datePath += `/${dayjs(endDate).valueOf()}`;
+    }
+  }
+  return await apiGet<RonStats>(`ron_stats/${playerId}${datePath}?mode=${mode}`);
 }
 
 export async function getRankRateBySeat(): Promise<RankRateBySeat> {
