@@ -15,7 +15,7 @@ export const getApiPrefix = () => DATA_MIRROR + Conf.apiSuffix;
 async function fetchWithTimeout(
   url: string,
   opts: Parameters<typeof fetch>[1] = {},
-  timeout = 5000
+  timeout = 10000
 ): Promise<Response> {
   const abortController = window.AbortController ? new AbortController() : { signal: undefined, abort: () => {} };
   const timeoutToken = setTimeout(function () {
