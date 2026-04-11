@@ -289,7 +289,7 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        label="立直流局"
+        label="立直流局率"
         statKey="riichi_draw_rate"
         description="立直流局局数 / 立直局数"
       />
@@ -306,7 +306,7 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
           stats={stats}
           formatter={formatPercent}
           statKey="riichi_multiway_rate"
-          label="立直多面"
+          label="立直多面率"
           description={
             <Box>
               <Trans>
@@ -325,7 +325,7 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
           stats={stats}
           formatter={formatPercent}
           statKey="riichi_good_shape_rate2"
-          label="立直好型"
+          label="立直好型率"
           description={
             <Box>
               <Trans>
