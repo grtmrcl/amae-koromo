@@ -78,6 +78,7 @@ export type PlayerExtendedStats = {
   draw_rate: number;
   draw_tenpai_rate: number;
   ura_rate: number;
+  effective_uradora_per_riichi_win?: number;
   ippatsu_rate: number;
   bombed_rate: number;
   avg_bombed_point: number;
@@ -87,6 +88,7 @@ export type PlayerExtendedStats = {
   riichi_deal_in_non_instant_rate: number;
   call_deal_in_rate: number;
   riichi_win_rate: number;
+  riichi_tsumo_rate?: number;
   call_win_rate: number;
   riichi_draw_rate: number;
   call_draw_rate: number;

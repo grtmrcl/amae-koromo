@@ -142,6 +142,15 @@ function MoreStats({
     <>
       <GenericStat stats={stats} formatter={formatIdentity} formatterHistogram={formatFixed3} statKey="max_consecutive_dealer" label="最大连庄" />
       <GenericStat stats={stats} formatter={formatPercent} statKey="ura_rate" label="里宝率" description="中里宝局数 / 立直和了局数" />
+      {(stats.effective_uradora_per_riichi_win || stats.effective_uradora_per_riichi_win === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatFixed3}
+          statKey="effective_uradora_per_riichi_win"
+          label="有効裏ドラ数"
+          description="有効裏ドラ数 / 立直和了局数"
+        />
+      )}
       <GenericStat
         stats={stats}
         formatter={formatPercent}
@@ -235,9 +244,18 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
         stats={stats}
         formatter={formatPercent}
         statKey="riichi_win_rate"
-        label="立直和了"
+        label="立直和了率"
         description="立直和了局数 / 立直局数"
       />
+      {(stats.riichi_tsumo_rate || stats.riichi_tsumo_rate === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatPercent}
+          statKey="riichi_tsumo_rate"
+          label="立直ツモ率"
+          description="立直ツモ局数 / 立直和了局数"
+        />
+      )}
       <GenericStat
         stats={stats}
         formatter={formatPercent}
@@ -280,7 +298,7 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
       <GenericStat
         stats={stats}
         formatter={formatPercent}
-        label="立直流局"
+        label="立直流局率"
         statKey="riichi_draw_rate"
         description="立直流局局数 / 立直局数"
       />
@@ -297,7 +315,7 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
           stats={stats}
           formatter={formatPercent}
           statKey="riichi_multiway_rate"
-          label="立直多面"
+          label="立直多面率"
           description={
             <Box>
               <Trans>
@@ -316,7 +334,7 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
           stats={stats}
           formatter={formatPercent}
           statKey="riichi_good_shape_rate2"
-          label="立直好型"
+          label="立直好型率"
           description={
             <Box>
               <Trans>
