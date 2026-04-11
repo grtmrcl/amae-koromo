@@ -142,6 +142,15 @@ function MoreStats({
     <>
       <GenericStat stats={stats} formatter={formatIdentity} formatterHistogram={formatFixed3} statKey="max_consecutive_dealer" label="最大连庄" />
       <GenericStat stats={stats} formatter={formatPercent} statKey="ura_rate" label="里宝率" description="中里宝局数 / 立直和了局数" />
+      {(stats.effective_uradora_per_riichi_win || stats.effective_uradora_per_riichi_win === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatFixed3}
+          statKey="effective_uradora_per_riichi_win"
+          label="有効裏ドラ数"
+          description="有効裏ドラ数 / 立直和了局数"
+        />
+      )}
       <GenericStat
         stats={stats}
         formatter={formatPercent}
