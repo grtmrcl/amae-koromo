@@ -47,6 +47,13 @@ const STATE_LABELS: Record<RonStatsState, string> = {
 
 const MAX_JUNME = 18;
 
+const Y_AXIS_MAX: Record<RonStatsState, number> = {
+  total: 4,
+  riichi: 10,
+  open: 6,
+  other: 4,
+};
+
 type ChartRow = { junme: number } & { [cat: string]: number };
 
 function buildChartData(
@@ -118,6 +125,7 @@ function RonStatsChart({ playerId, state }: { playerId: number; state: RonStatsS
         <YAxis
           tickFormatter={(v: number) => `${v.toFixed(1)}%`}
           label={{ value: "和了率(%)", angle: -90, position: "insideLeft", offset: 10 }}
+          domain={[0, Y_AXIS_MAX[state]]}
         />
         <Tooltip
           formatter={(value: number) => (isNaN(value) ? "データなし" : formatPercent(value / 100))}
