@@ -235,9 +235,18 @@ function RiichiStats({ stats }: { stats: PlayerExtendedStats; metadata: PlayerMe
         stats={stats}
         formatter={formatPercent}
         statKey="riichi_win_rate"
-        label="立直和了"
+        label="立直和了率"
         description="立直和了局数 / 立直局数"
       />
+      {(stats.riichi_tsumo_rate || stats.riichi_tsumo_rate === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatPercent}
+          statKey="riichi_tsumo_rate"
+          label="立直ツモ率"
+          description="立直ツモ局数 / 立直和了局数"
+        />
+      )}
       <GenericStat
         stats={stats}
         formatter={formatPercent}

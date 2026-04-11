@@ -87,6 +87,7 @@ export type PlayerExtendedStats = {
   riichi_deal_in_non_instant_rate: number;
   call_deal_in_rate: number;
   riichi_win_rate: number;
+  riichi_tsumo_rate?: number;
   call_win_rate: number;
   riichi_draw_rate: number;
   call_draw_rate: number;
