@@ -232,6 +232,15 @@ function MoreStats({
         label="局收支"
         description={`(${t("场平均素点")} - ${t("场起始素点")}) * ${t("记录场数")} / ${t("总计局数")}`}
       />
+      {(stats.dealer_rate || stats.dealer_rate === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatPercent}
+          statKey="dealer_rate"
+          label="親局率"
+          description="親局数 / 总局数"
+        />
+      )}
       <StatItem label="总计局数">{stats.count}</StatItem>
     </>
   );
@@ -408,6 +417,24 @@ function LuckStats({ stats }: { stats: PlayerExtendedStats }) {
         }
         hideValue={!stats?.avg_start_shanten_non_dealer}
       />
+      {(stats.avg_haipai_dora_dealer || stats.avg_haipai_dora_dealer === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatFixed3}
+          statKey="avg_haipai_dora_dealer"
+          label="親配牌ドラ"
+          description="親局の配牌時平均ドラ数"
+        />
+      )}
+      {(stats.avg_haipai_dora_non_dealer || stats.avg_haipai_dora_non_dealer === 0) && (
+        <GenericStat
+          stats={stats}
+          formatter={formatFixed3}
+          statKey="avg_haipai_dora_non_dealer"
+          label="子配牌ドラ"
+          description="子局の配牌時平均ドラ数"
+        />
+      )}
     </>
   );
 }
