@@ -100,6 +100,8 @@ export type PlayerExtendedStats = {
   avg_start_shanten: number;
   avg_start_shanten_dealer?: number;
   avg_start_shanten_non_dealer?: number;
+  avg_haipai_dora_dealer?: number;
+  avg_haipai_dora_non_dealer?: number;
   deal_in_to_riichi: number;
   deal_in_to_call: number;
   deal_in_to_damaten: number;
@@ -121,6 +123,7 @@ export type PlayerExtendedStats = {
   deal_in_point_loss: number;
   net_point_efficiency: number;
   game_score_balance?: number;
+  dealer_rate?: number;
 };
 export interface Metadata {
   count: number;
